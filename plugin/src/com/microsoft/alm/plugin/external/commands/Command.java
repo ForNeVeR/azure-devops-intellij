@@ -229,6 +229,12 @@ public abstract class Command<T> {
         try {
             Throwable error = syncError.get();
             if (error != null) {
+                if (error.getMessage().contains("tf eula") && !EULADialog.wasShown) {
+                    boolean accepted = new EULADialog().show();
+                    if (accepted) {
+                        return runSynchronously();
+                    }
+                }
                 if (error instanceof RuntimeException) {
                     throw (RuntimeException) error;
                 } else {
