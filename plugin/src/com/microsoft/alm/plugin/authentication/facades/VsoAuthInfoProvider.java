@@ -111,6 +111,7 @@ public class VsoAuthInfoProvider implements AuthenticationInfoProvider {
 
         if (tokenPair != null) {
             final Client client = RestClientHelper.getClient(serverUri.toString(), tokenPair.AccessToken.Value);
+            logger.info("!! Access Token Length: " + tokenPair.AccessToken.Value.length());
 
             if (client != null) {
                 //Or we could reconsider the name of the token.  Now we call Profile endpoint just to get the email address
